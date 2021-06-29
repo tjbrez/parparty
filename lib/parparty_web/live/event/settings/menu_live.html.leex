@@ -1,0 +1,17 @@
+<div class="flex justify-center my-4">
+  <div class="title"><%= @name %></div>
+</div>
+<div class="flex flex-col justify-center">
+    <%= link to: "/events/#{@guid}" do %>
+      <button type="button" class="primary-btn">Switch to Player View</button>
+    <% end %>
+    <%= link to: "/events/#{@guid}/settings/general" do %>
+      <button type="button">General Settings</button>
+    <% end %>
+    <%= link to: "/events/#{@guid}/settings/course" do %>
+      <button type="button">Course Setup</button>
+    <% end %>
+    <%= link to: "/events/#{@guid}/settings/players" do %>
+      <button type="button">Player Setup</button>
+    <% end %>
+</div>

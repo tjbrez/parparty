@@ -1,0 +1,11 @@
+<div class="flex justify-center my-4">
+  <div class="title"><%= @name %></div>
+</div>
+<div class="flex flex-col justify-center">
+    <%= link to: "/events/#{@guid}/scoreboards" do %>
+      <button type="button" class="primary-btn">Enter/View Scores</button>
+    <%= end %>
+    <%= link to: "/events/#{@guid}/leaderboard" do %>
+      <button type="button">View Leaderboard</button>
+    <%= end %>
+</div>

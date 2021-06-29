@@ -1,0 +1,114 @@
+body {
+    @apply text-gray-800;
+    @apply font-medium;
+}
+
+button {
+    @apply border;
+    @apply border-cool-gray-300;
+    @apply rounded-lg;
+    @apply outline-none;
+    @apply my-3;
+    @apply font-medium;
+    @apply text-gray-800;
+    @apply tracking-normal;
+    @apply w-full;
+}
+
+button:hover {
+    @apply border-cool-gray-300;
+    @apply bg-cool-gray-300;
+    @apply text-gray-800;
+}
+
+button:active {
+    @apply border-cool-gray-300;
+    @apply bg-cool-gray-300;
+    @apply text-gray-800;
+}
+
+button:focus {
+    @apply outline-none;
+    @apply shadow-none;
+    @apply border-cool-gray-300;
+    @apply bg-white;
+    @apply text-gray-800;
+}
+
+input {
+    @apply border;
+    @apply border-cool-gray-300;
+    @apply rounded-lg;
+    @apply outline-none;
+    @apply py-4;
+    @apply mb-8;
+    @apply font-light;
+    @apply text-gray-800;
+    @apply w-full;
+}
+
+label {
+    @apply font-normal;
+    @apply text-gray-700;
+}
+
+.new-event-form {
+    @apply px-4;
+    @apply w-full;
+}
+
+.course-form {
+    @apply px-4;
+    @apply w-full;
+}
+
+.primary-btn {
+    @apply bg-cool-gray-200;
+}
+
+.primary-btn:focus {
+    @apply bg-cool-gray-200;
+}
+
+.alert {
+    @apply flex;
+    @apply justify-center;
+    @apply text-center;
+    @apply mb-10;
+    @apply mx-4;
+    @apply border;
+    @apply rounded-lg;
+    @apply p-4;
+}
+
+.alert-info {
+    @apply bg-blue-100;
+    @apply border-blue-500;
+    @apply text-blue-700;
+}
+
+.alert-danger {
+    @apply bg-red-100;
+    @apply border-red-500;
+    @apply text-red-700;
+}
+
+.title {
+    @apply text-xl;
+    @apply mb-4;
+    @apply text-center;
+}
+
+.hole-btn {
+    @apply text-center;
+    width: 40px;
+    height: 40px;
+    @apply font-light;
+}
+
+.hole-input {
+    @apply text-center;
+    width: 40px;
+    height: 40px;
+    @apply font-light;
+}

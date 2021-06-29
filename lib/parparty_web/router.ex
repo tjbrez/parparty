@@ -17,7 +17,16 @@ defmodule ParpartyWeb.Router do
   scope "/", ParpartyWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    # New Event
+    live "/", Event.NewLive, :index
+
+    # Player View
+    live "/events/:guid", Event.Players.MenuLive, :index
+
+    # Settings View
+    live "/events/:guid/settings", Event.Settings.MenuLive, :index
+    live "/events/:guid/settings/general", Event.Settings.GeneralLive, :index
+    live "/events/:guid/settings/course", Event.Settings.CourseLive, :index
   end
 
   # Other scopes may use custom stacks.
