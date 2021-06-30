@@ -27,6 +27,7 @@ defmodule ParpartyWeb.Router do
     live "/events/:guid/settings", Event.Settings.MenuLive, :index
     live "/events/:guid/settings/general", Event.Settings.GeneralLive, :index
     live "/events/:guid/settings/course", Event.Settings.CourseLive, :index
+    live "/events/:guid/settings/players", Event.Settings.PlayersLive, :index
   end
 
   # Other scopes may use custom stacks.

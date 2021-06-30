@@ -6,7 +6,7 @@ defmodule ParpartyWeb.Event.Settings.CourseLive do
 
   @impl true
   def mount(params, _session, socket) do
-    event = Event.get_event_by_guid!(params["guid"])
+    event = Event.get_event_by_guid!(params["guid"], [:course])
     {:ok, assign(socket, event: event, course: get_course(event.course))}
   end
 

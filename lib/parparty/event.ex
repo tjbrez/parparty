@@ -7,10 +7,13 @@ defmodule Parparty.Event do
     alias Parparty.Repo
     alias Parparty.Schemas.Event, as: EventSchema
     alias Parparty.Schemas.Course, as: CourseSchema
+    alias Parparty.Schemas.Player, as: PlayerSchema
 
     def get_event!(id), do: Repo.get!(EventSchema, id)
 
-    def get_event_by_guid!(guid), do: Repo.get_by!(EventSchema, guid: guid) |> Repo.preload([:course])
+    def get_event_by_guid!(guid, preloads \\ []) do
+      Repo.get_by!(EventSchema, guid: guid) |> Repo.preload(preloads)
+    end
 
     def create_event(attrs \\ %{}) do
       attrs = Map.merge(
@@ -33,6 +36,16 @@ defmodule Parparty.Event do
       course
       |> CourseSchema.changeset(attrs)
       |> Repo.insert_or_update()
+    end
+
+    def upsert_player(player, attrs \\ %{}) do
+      player
+      |> PlayerSchema.changeset(attrs)
+      |> Repo.insert_or_update()
+    end
+
+    def delete_player(player) do
+      player |> Repo.delete()
     end
 
   

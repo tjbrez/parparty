@@ -52,18 +52,22 @@ label {
     @apply text-gray-700;
 }
 
-.new-event-form {
+form {
     @apply px-4;
     @apply w-full;
 }
 
-.course-form {
-    @apply px-4;
-    @apply w-full;
+a {
+    @apply text-blue-700;
+    @apply cursor-pointer;
 }
 
 .primary-btn {
     @apply bg-cool-gray-200;
+}
+
+.danger-btn {
+    @apply bg-red-200;
 }
 
 .primary-btn:focus {

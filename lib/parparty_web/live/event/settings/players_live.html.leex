@@ -1,0 +1,72 @@
+<div class="flex justify-center my-4">
+  <div class="title"><%= @event.name %></div>
+</div>
+<div class="flex justify-center">
+  <div class="px-4 w-full">
+    <%= link to: "/events/#{@event.guid}/settings" do %>
+      <button type="button" class="mb-10">Settings Menu</button>
+    <% end %>
+    <%= if length(@players) > 0 do %>
+      <div class="grid grid-cols-4 gap-2">
+        <label class="col-span-2">Name</label>
+        <label>Scorecard</label>
+        <label>Handicap</label>
+        <%= for player <- @players do %>
+          <hr class="col-span-4"/>
+          <div class="col-span-2">
+            <%= link to: "/events/#{@event.guid}/settings/players?type=edit&id=#{player.id}" do %>
+              <%= player.name %>
+            <% end %>
+          </div>
+          <div><%= player.scorecard %></div>
+          <div><%= player.handicap %></div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center font-bold">Use the form below to start adding players.</div>
+    <% end %>
+    <form class="px-0" phx-submit="upsert_player">
+      <div class="border border-cool-gray-300 rounded-lg p-8 my-10">
+        <label for="name">Player Name</label>
+        <input type="text" name="name" value="<%= if @player, do: @player.name, else: "" %>" placeholder="Sherlock H" autocomplete="off" autofocus/>
+        <label for="name">Scorecard</label>
+        <button type="button" onclick="decrementValue('scorecard')" class="hole-btn"> &#706; </button>
+        <input id="scorecard" name="scorecard" value="<%= if @player, do: @player.scorecard, else: "1" %>" class="hole-input" readonly/>
+        <button type="button" onclick="incrementValue('scorecard')" class="hole-btn"> &#707; </button>
+        <label for="name">Handicap (optional)</label>
+        <button type="button" onclick="decrementValue('handicap', true)" class="hole-btn"> &#706; </button>
+        <input id="handicap" name="handicap" value="<%= if @player, do: @player.handicap, else: "" %>" class="hole-input" readonly/>
+        <button type="button" onclick="incrementValue('handicap')" class="hole-btn"> &#707; </button>
+        <%= if @player do %>
+          <button type="submit" class="primary-btn">Update Player</button>
+          <button type="button" data-confirm="Are you sure you want to delete the player and their scores?" class="danger-btn" phx-click="delete_player">Delete Player</button>
+          <%= link to: "/events/#{@event.guid}/settings/players" do %>
+            <button type="button" class="mb-10">Cancel</button>
+          <% end %>
+        <% else %>
+          <button type="submit" class="primary-btn">Add Player</button>
+        <% end %>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function incrementValue(id) {
+      var value = parseInt(document.getElementById(id).value, 10);
+      value = isNaN(value) ? 0 : value;
+      value++;
+      document.getElementById(id).value = value;
+  }
+
+  function decrementValue(id, optional = false) {
+      var value = parseInt(document.getElementById(id).value, 10);
+      value = isNaN(value) ? 0 : value;
+      if (value > 1) {
+        value--;
+      } else if (optional) {
+        value = "";
+      }
+      document.getElementById(id).value = value;
+  }
+</script>

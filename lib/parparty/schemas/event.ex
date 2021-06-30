@@ -3,6 +3,7 @@ defmodule Parparty.Schemas.Event do
     import Ecto.Changeset
     alias Parparty.Schemas.Event
     alias Parparty.Schemas.Course
+    alias Parparty.Schemas.Player
   
   
     schema "events" do
@@ -12,6 +13,7 @@ defmodule Parparty.Schemas.Event do
       field :settings_code, :integer
 
       belongs_to :course, Course, [on_replace: :update]
+      has_many :players, Player, preload_order: [asc: :scorecard, asc: :name]
   
       timestamps()
     end
