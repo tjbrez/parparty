@@ -22,6 +22,8 @@ defmodule ParpartyWeb.Router do
 
     # Player View
     live "/events/:guid", Event.Players.MenuLive, :index
+    live "/events/:guid/scorecards", Event.Players.ScorecardsLive, :index
+    live "/events/:guid/scorecards/:scorecard_num", Event.Players.ScorecardLive, :index
 
     # Settings View
     live "/events/:guid/settings", Event.Settings.MenuLive, :index

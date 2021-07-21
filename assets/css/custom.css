@@ -105,14 +105,17 @@ a {
 
 .hole-btn {
     @apply text-center;
+    @apply font-light;
     width: 40px;
     height: 40px;
-    @apply font-light;
+    touch-action: manipulation;
 }
 
 .hole-input {
     @apply text-center;
+    @apply font-light;
+    @apply mb-0;
     width: 40px;
     height: 40px;
-    @apply font-light;
+    touch-action: manipulation;
 }
