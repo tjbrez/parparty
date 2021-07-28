@@ -5,7 +5,8 @@ body {
 
 button {
     @apply border;
-    @apply border-cool-gray-300;
+    @apply border-white;
+    @apply bg-cool-gray-100;
     @apply rounded-lg;
     @apply outline-none;
     @apply my-3;
@@ -63,7 +64,7 @@ a {
 }
 
 .primary-btn {
-    @apply bg-cool-gray-200;
+    @apply bg-green-100;
 }
 
 .danger-btn {
@@ -71,7 +72,7 @@ a {
 }
 
 .primary-btn:focus {
-    @apply bg-cool-gray-200;
+    @apply bg-green-100;
 }
 
 .alert {
@@ -113,7 +114,7 @@ a {
 
 .hole-input {
     @apply text-center;
-    @apply font-light;
+    @apply font-normal;
     @apply mb-0;
     width: 40px;
     height: 40px;

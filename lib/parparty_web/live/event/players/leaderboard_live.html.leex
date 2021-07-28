@@ -1,0 +1,30 @@
+<div class="flex justify-center flex-col mt-4">
+  <div class="title">Leaderboard</div>
+</div>
+<!-- div class="flex justify-center flex-col mb-4">
+  <div class="text-sm text-center italic">No refresh needed</div>
+</div -->
+<div class="flex flex-col justify-center">
+  <div class="grid grid-cols-5 gap-2 my-6 mx-10">
+    <div class="font-semibold">Pos</div>
+    <div class="font-semibold col-span-2">Player</div>
+    <div class="text-right font-semibold">Score</div>
+    <div class="text-right font-semibold">Thru</div>
+    <%= for {pos, name, score, thru} <- @leaderboard do %>
+      <hr class="col-span-5" />
+      <div class="leading-8 "><%= pos %></div>
+      <div class="leading-8 col-span-2"><%= name %></div>
+      <div class="leading-8 text-right ">
+        <%= case score do
+          0 -> "E"
+          s when s > 0 -> "+#{score}"
+          _ -> "#{score}"
+        end %>
+      </div>
+      <div class="leading-8 text-right "><%= thru %></div>
+    <% end %>
+  </div>
+  <%= link to: "/events/#{@event.guid}" do %>
+    <button type="button">Close</button>
+  <%= end %>
+</div>
