@@ -8,7 +8,7 @@
   <%= link to: "/events/#{@event.guid}/scorecard/" do %>
     <button type="button">View Full Scorecard</button><br />
   <%= end %>
-  <%= link to: "/events/#{@event.guid}/leaderboard" do %>
+  <%= link to: "/events/#{@event.guid}/leaderboard?close_url=/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num}" do %>
     <button type="button">Live Leaderboard</button><br />
   <%= end %>
   <form phx-submit="save">

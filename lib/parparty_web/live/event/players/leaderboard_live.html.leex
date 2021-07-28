@@ -24,7 +24,7 @@
       <div class="leading-8 text-right "><%= thru %></div>
     <% end %>
   </div>
-  <%= link to: "/events/#{@event.guid}" do %>
+  <%= link to: @close_url do %>
     <button type="button">Close</button>
   <%= end %>
 </div>

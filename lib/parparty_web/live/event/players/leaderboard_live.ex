@@ -6,7 +6,13 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
   @impl true
   def mount(params, _session, socket) do
     event = Event.get_event_by_guid!(params["guid"], [:players, :course])
-    {:ok, assign(socket, event: event, leaderboard: get_leaderboard(event.players, event.course))}
+    {
+      :ok, 
+      assign(
+        socket, 
+        event: event, 
+        leaderboard: get_leaderboard(event.players, event.course),
+        close_url: close_url(params["close_url"], event.guid))}
   end
 
   defp get_leaderboard(players, course) do
@@ -31,6 +37,14 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
 
   defp get_thru(%{} = score) do
     map_size(score)
+  end
+
+  defp close_url(nil, guid) do
+    "/events/#{guid}"
+  end
+
+  defp close_url(url, _guid) do
+    url
   end
 
   defp calc_total(hole, hole_data, total, course) do
