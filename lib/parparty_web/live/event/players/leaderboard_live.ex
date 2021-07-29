@@ -11,15 +11,36 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
       assign(
         socket, 
         event: event, 
-        leaderboard: get_leaderboard(event.players, event.course),
+        leaderboard: get_leaderboard(event),
         close_url: close_url(params["close_url"], event.guid))}
   end
 
-  defp get_leaderboard(players, course) do
-    players
-      |> Enum.map(fn p -> {p.name, get_score(p.score, course), get_thru(p.score)} end)
+  defp get_leaderboard(event) do
+    event.players
+      |> format_for_event_type(event.type)
+      |> Enum.map(fn p -> {p.name, get_score(p.score, event.course), get_thru(p.score)} end)
       |> Enum.sort(&(elem(&1, 1) <= elem(&2, 1)))
       |> add_position()
+  end
+
+  defp format_for_event_type(players, "Best Ball") do
+    teams = players 
+      |> Enum.group_by(fn %{scorecard: x} -> x end)
+      |> Enum.map(&build_best_ball_team(&1))
+  end
+
+  defp build_best_ball_team({_scorecard_num, players}) do
+    combined_scores = Enum.map(players, fn p -> p.score end)
+     |> Enum.min_by(fn scores -> scores["hole01"]["strokes"] end)
+
+    combined_names = Enum.reduce(players, " ", fn p, names -> "#{names}, #{p.name}" end)
+      |> String.replace(" , ", "")
+    
+    %{name: combined_names, score: combined_scores || %{}}
+  end
+
+  defp format_for_event_type(players, _type) do
+    players
   end
 
   defp get_score(nil, _course) do
@@ -27,8 +48,7 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
   end
 
   defp get_score(%{} = score, course) do
-    {_, score} = Enum.reduce(score, 0, fn {hole, hole_data}, total -> {hole, calc_total(hole, hole_data, total, course)} end)
-    score
+    Enum.reduce(score, 0, fn {hole, hole_data}, total -> calc_total(hole, hole_data, total, course) end)
   end
 
   defp get_thru(nil) do

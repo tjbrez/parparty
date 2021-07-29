@@ -9,7 +9,7 @@ defmodule ParpartyWeb.Event.NewLive do
   end
 
   @impl true
-  def handle_event("create", %{"name" => name, "email" => email} = params, socket) do
+  def handle_event("create", %{"name" => name, "email" => email, "type" => type} = params, socket) do
 
     case Event.create_event(params) do
       {:ok, _event} ->

@@ -48,6 +48,18 @@ input {
     @apply w-full;
 }
 
+select {
+    @apply border;
+    @apply border-cool-gray-300;
+    @apply rounded-lg;
+    @apply outline-none;
+    @apply px-4;
+    @apply mb-8;
+    @apply font-light;
+    @apply text-gray-800;
+    @apply w-full;
+}
+
 label {
     @apply font-normal;
     @apply text-gray-700;

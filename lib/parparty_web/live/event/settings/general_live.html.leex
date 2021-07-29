@@ -2,11 +2,15 @@
   <div class="title"><%= @event.name %></div>
 </div>
 <div class="flex justify-center">
-    <form phx-submit="update">
+  <form phx-submit="update">
     <label for="name">Event Name</label>
     <input type="text" name="name" value="<%= @event.name %>" placeholder="My Super Awesome Golf Scramble" autocomplete="off"/>
     <label for="name">Your Email Address</label>
     <input type="email" name="email" value="<%= @event.email %>" placeholder="thebogeyman@example.com" autocomplete="off"/>
+    <label for="name">Event Type</label>
+    <div class="mb-8">
+      <%= @event.type %>
+    </div>
     <div class="flex flex-col justify-center">
       <button type="submit" class="primary-btn">Save</button>
       <%= link to: "/events/#{@event.guid}/settings" do %>

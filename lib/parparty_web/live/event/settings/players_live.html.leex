@@ -29,7 +29,7 @@
       <div class="border border-cool-gray-300 rounded-lg p-8 my-10">
         <label for="name">Player Name</label>
         <input type="text" name="name" value="<%= if @player, do: @player.name, else: "" %>" placeholder="Sherlock H" autocomplete="off" autofocus/>
-        <label for="name">Scorecard</label>
+        <label for="name"><%= if @event.type == "Stroke", do: "Scorecard", else: "Team" %></label>
         <button type="button" onclick="decrementValue('scorecard')" class="hole-btn"> &#706; </button>
         <input id="scorecard" name="scorecard" value="<%= if @player, do: @player.scorecard, else: "1" %>" class="hole-input" readonly/>
         <button type="button" onclick="incrementValue('scorecard')" class="hole-btn"> &#707; </button>

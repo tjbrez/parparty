@@ -11,6 +11,7 @@ defmodule Parparty.Schemas.Event do
       field :email, :string
       field :guid, Ecto.UUID
       field :settings_code, :integer
+      field :type, :string
 
       belongs_to :course, Course, [on_replace: :update]
       has_many :players, Player, preload_order: [asc: :scorecard, asc: :name]
@@ -21,7 +22,7 @@ defmodule Parparty.Schemas.Event do
     @doc false
     def changeset(%Event{} = event, attrs) do
       event
-      |> cast(attrs, [:name, :email, :guid, :settings_code, :course_id])
-      |> validate_required([:name, :email, :guid, :settings_code])
+      |> cast(attrs, [:name, :email, :guid, :settings_code, :course_id, :type])
+      |> validate_required([:name, :email, :guid, :settings_code, :type])
     end
   end

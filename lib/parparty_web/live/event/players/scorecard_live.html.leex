@@ -20,7 +20,7 @@
       <div class="text-center">Old</div>
       <div class="ml-16 pl-3 col-span-2">New</div>
       <%= for player <- @players do %>
-        <div class="leading-8 text-right mt-7 font-semibold"><%= player.name %></div>
+        <div class="leading-8 text-center mt-7 font-semibold"><%= player.name %></div>
         <div class="flex justify-center mt-3">
           <input value="<%= player.score[@hole_key]["strokes"]  || "" %>" class="hole-input" readonly/>
         </div>

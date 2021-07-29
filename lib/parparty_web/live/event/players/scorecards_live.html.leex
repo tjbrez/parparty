@@ -8,7 +8,7 @@
     <%= for {scorecard_id, players} <- @scorecards do %>
       <%= link to: "/events/#{@event.guid}/scorecards/#{scorecard_id}" do %>
         <button type="button" class="h-60">
-          <span class="font-bold">Scorecard <%= scorecard_id %></span><br />
+          <span class="font-bold"><%= if @event.type == "Stroke", do: "Scorecard", else: "Team" %> <%= scorecard_id %></span><br />
           <%= for player <- players do %>
             <span class="leading-8"><%= player.name %></span><br />
           <%= end %>

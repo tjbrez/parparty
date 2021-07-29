@@ -7,6 +7,12 @@
     <input type="text" name="name" value="<%= @name %>" placeholder="My Super Awesome Golf Scramble" autocomplete="off"/>
     <label for="name">Your Email Address</label>
     <input type="email" name="email" value="<%= @email %>" placeholder="thebogeyman@example.com" autocomplete="off"/>
+    <label for="type">Event Type</label>
+    <select name="type" class="w-60">
+      <option value="Stroke">Stroke</option>
+      <option value="Scramble">Scramble</option>
+      <option value="Best Ball">Best Ball</option>
+    </select>
     <div class="flex justify-center">
       <button type="submit" class="primary-btn">Create New Event</button>
     </div>
