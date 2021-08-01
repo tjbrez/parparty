@@ -12,11 +12,11 @@ defmodule ParpartyWeb.Event.NewLive do
   def handle_event("create", %{"name" => name, "email" => email, "type" => type} = params, socket) do
 
     case Event.create_event(params) do
-      {:ok, _event} ->
+      {:ok, event} ->
         {:noreply,
           socket
-          |> put_flash(:info, "#{name} has been created! Please check your email for next steps.")
-          |> assign(name: "", email: email)}
+          |> put_flash(:info, "#{name} has been created!")
+          |> redirect(to: "/events/#{event.guid}/settings/")}
 
       {:error, changeset} ->
         {:noreply,
