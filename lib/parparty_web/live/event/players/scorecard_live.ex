@@ -2,6 +2,7 @@ defmodule ParpartyWeb.Event.Players.ScorecardLive do
   use ParpartyWeb, :live_view
 
   alias Parparty.Event
+  alias Phoenix.PubSub
 
   @impl true
   def mount(params, _session, socket) do
@@ -38,6 +39,8 @@ defmodule ParpartyWeb.Event.Players.ScorecardLive do
     Enum.each params, fn {player_id, score} ->
       socket |> get_player(player_id) |> save_player_score(score, socket.assigns.hole_key)
     end
+
+    PubSub.broadcast(Parparty.PubSub, "leaderboard", :refresh)
 
     {:noreply,
       socket

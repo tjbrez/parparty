@@ -2,9 +2,12 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
   use ParpartyWeb, :live_view
 
   alias Parparty.Event
+  alias Phoenix.PubSub
 
   @impl true
   def mount(params, _session, socket) do
+    PubSub.subscribe(Parparty.PubSub, "leaderboard")
+
     event = Event.get_event_by_guid!(params["guid"], [:players, :course])
     {
       :ok, 
@@ -13,6 +16,15 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
         event: event, 
         leaderboard: get_leaderboard(event),
         close_url: close_url(params["close_url"], event.guid))}
+  end
+
+  def handle_info(:refresh, socket) do
+    {:noreply,
+      assign(
+        socket,
+        leaderboard: get_leaderboard(
+          Event.get_event_by_guid!(socket.assigns.event.guid, [:players, :course])
+        ))}
   end
 
   defp get_leaderboard(event) do
@@ -31,7 +43,7 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
 
   defp build_best_ball_team({_scorecard_num, players}) do
     combined_scores = Enum.map(players, fn p -> p.score end)
-     |> Enum.min_by(fn scores -> scores["hole01"]["strokes"] end)
+      |> Enum.min_by(fn scores -> scores["hole01"]["strokes"] end)
 
     combined_names = Enum.reduce(players, " ", fn p, names -> "#{names}, #{p.name}" end)
       |> String.replace(" , ", "")
