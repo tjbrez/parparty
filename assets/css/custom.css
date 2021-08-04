@@ -6,7 +6,7 @@ body {
 button {
     @apply border;
     @apply border-white;
-    @apply bg-cool-gray-100;
+    @apply bg-cool-gray-200;
     @apply rounded-lg;
     @apply outline-none;
     @apply my-3;
@@ -14,6 +14,7 @@ button {
     @apply text-gray-800;
     @apply tracking-normal;
     @apply w-full;
+    height: 44px;
 }
 
 button:hover {
@@ -76,7 +77,7 @@ a {
 }
 
 .primary-btn {
-    @apply bg-green-100;
+    @apply bg-green-200;
 }
 
 .danger-btn {
@@ -84,7 +85,7 @@ a {
 }
 
 .primary-btn:focus {
-    @apply bg-green-100;
+    @apply bg-green-200;
 }
 
 .alert {
@@ -131,4 +132,34 @@ a {
     width: 40px;
     height: 40px;
     touch-action: manipulation;
+}
+
+.scorecard-form {
+    @apply border;
+    @apply border-cool-gray-300;
+    @apply rounded-lg;
+    @apply px-6;
+    @apply py-4;
+    @apply my-4;
+}
+
+.scorecard-box {
+    @apply border;
+    @apply p-1;
+    @apply text-center;
+    height: 30px;
+    @apply bg-blue-50;
+}
+
+.scorecard-box.par {
+    @apply bg-indigo-100;
+}
+
+.scorecard-box.score {
+    @apply bg-white;
+    @apply font-semibold;
+}
+
+.scorecard-box.totals {
+    @apply bg-white;
 }

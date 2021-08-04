@@ -5,13 +5,13 @@
   <%= link to: "/events/#{@event.guid}/scorecards" do %>
     <button type="button">Back to Scorecards List</button><br />
   <%= end %>
-  <%= link to: "/events/#{@event.guid}/scorecard/" do %>
+  <%= link to: "/events/#{@event.guid}/scorecards/#{@scorecard_num}/preview?close_url=/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num}" do %>
     <button type="button">View Full Scorecard</button><br />
   <%= end %>
   <%= link to: "/events/#{@event.guid}/leaderboard?close_url=/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num}" do %>
     <button type="button">Live Leaderboard</button><br />
   <%= end %>
-  <form phx-submit="save">
+  <form phx-submit="save" class="scorecard-form">
     <div class="text-center m-8 text-xl font-semibold">
       Hole <%= @hole_num %> <span class="font-thin">-</span> Par <%= @hole_data["par"] %>
     </div>

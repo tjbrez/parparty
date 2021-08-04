@@ -1,0 +1,106 @@
+<div class="flex justify-center flex-col mt-4">
+  <div class="title">Scorecard</div>
+</div>
+<div class="flex flex-col justify-center my-8">
+
+  <%= for player <- @players do %>
+    <div class="col-span-2 font-semibold text-lg"><%= player.name %></div>
+    <div class="grid grid-cols-11 gap-0 mt-4 mb-4">
+      <div class="scorecard-box">#1</div>
+      <div class="scorecard-box">#2</div>
+      <div class="scorecard-box">#3</div>
+      <div class="scorecard-box">#4</div>
+      <div class="scorecard-box">#5</div>
+      <div class="scorecard-box">#6</div>
+      <div class="scorecard-box">#7</div>
+      <div class="scorecard-box">#8</div>
+      <div class="scorecard-box">#9</div>
+      <div class="scorecard-box col-span-2">OUT</div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole01"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole02"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole03"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole04"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole05"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole06"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole07"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole08"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole09"]["par"] %></div>
+      <div class="scorecard-box col-span-2 par"><%= @course_details.front_total %></div>
+      <div class="scorecard-box score"><%= player.score["hole01"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole02"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole03"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole04"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole05"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole06"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole07"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole08"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole09"]["strokes"] %></div>
+      <div class="scorecard-box col-span-2 score">
+        <%= case player.front_score do
+          0 -> ""
+          _ -> player.front_score
+        end %>
+      </div>
+    </div>
+    <div class="grid grid-cols-11 gap-0 mt-4 mb-4">
+      <div class="scorecard-box">#10</div>
+      <div class="scorecard-box">#11</div>
+      <div class="scorecard-box">#12</div>
+      <div class="scorecard-box">#13</div>
+      <div class="scorecard-box">#14</div>
+      <div class="scorecard-box">#15</div>
+      <div class="scorecard-box">#16</div>
+      <div class="scorecard-box">#17</div>
+      <div class="scorecard-box">#18</div>
+      <div class="scorecard-box col-span-2">IN</div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole10"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole11"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole12"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole13"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole14"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole15"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole16"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole17"]["par"] %></div>
+      <div class="scorecard-box par"><%= @event.course.holes["hole18"]["par"] %></div>
+      <div class="scorecard-box col-span-2 par"><%= @course_details.back_total %></div>
+      <div class="scorecard-box score"><%= player.score["hole10"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole11"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole12"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole13"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole14"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole15"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole16"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole17"]["strokes"] %></div>
+      <div class="scorecard-box score"><%= player.score["hole18"]["strokes"] %></div>
+      <div class="scorecard-box col-span-2 score">
+        <%= case player.back_score do
+          0 -> ""
+          _ -> player.back_score
+        end %>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-0 mt-4 mb-16">
+      <div class="scorecard-box totals">Strokes:
+        <span class="font-semibold">
+          <%= case player.front_score + player.back_score do
+            0 -> ""
+            _ -> player.front_score + player.back_score
+          end %>
+        </span>
+      </div>
+      <div class="scorecard-box totals">To Par: 
+        <span class="font-semibold">
+          <%= case player.to_par do
+            0 -> "E"
+            s when s > 0 -> "+#{player.to_par }"
+            _ -> "#{player.to_par }"
+          end %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+
+  <%= link to: @close_url do %>
+    <button type="button" class="mt-0 mb-16">Close</button>
+  <%= end %>
+</div>

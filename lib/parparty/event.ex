@@ -47,17 +47,4 @@ defmodule Parparty.Event do
     def delete_player(player) do
       player |> Repo.delete()
     end
-
-  
-    # def subscribe do
-    #   Phoenix.PubSub.subscribe(Demo.PubSub, "posts")
-    # end
-  
-    # defp broadcast({:error, _reason} = error, _event), do: error
-  
-    # defp broadcast({:ok, post}, event) do
-    #   Phoenix.PubSub.broadcast(Demo.PubSub, "posts", {event, post})
-    #   {:ok, post}
-    # end
-  
   end
