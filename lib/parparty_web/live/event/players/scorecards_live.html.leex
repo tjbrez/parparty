@@ -3,16 +3,16 @@
 </div>
 <div class="flex flex-col justify-center">
     <%= link to: "/events/#{@event.guid}" do %>
-      <button type="button">Back to Main Menu</button>
-    <%= end %>
+      <button type="button">Main Menu</button>
+    <% end %>
     <%= for {scorecard_id, players} <- @scorecards do %>
       <%= link to: "/events/#{@event.guid}/scorecards/#{scorecard_id}" do %>
         <button type="button" class="h-60">
           <span class="font-bold"><%= if @event.type == "Stroke", do: "Scorecard", else: "Team" %> <%= scorecard_id %></span><br />
           <%= for player <- players do %>
             <span class="leading-8"><%= player.name %></span><br />
-          <%= end %>
+          <% end %>
         </button>
-      <%= end %>
+      <% end %>
     <% end %>
 </div>

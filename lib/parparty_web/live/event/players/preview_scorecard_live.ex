@@ -12,6 +12,7 @@ defmodule ParpartyWeb.Event.Players.PreviewScorecardLive do
         socket, 
         event: event, 
         players: get_scorecard_players(event.players, params["scorecard_num"], event.course), 
+        scorecard_num: params["scorecard_num"], 
         course_details: course_details(event.course), 
         close_url: close_url(params["close_url"], event.guid, params["scorecard_num"]))}
   end

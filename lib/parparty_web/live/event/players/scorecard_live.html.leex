@@ -3,14 +3,16 @@
 </div>
 <div class="flex flex-col justify-center">
   <%= link to: "/events/#{@event.guid}/scorecards" do %>
-    <button type="button">Back to Scorecards List</button><br />
-  <%= end %>
+    <button type="button">Scorecards List</button><br />
+  <% end %>
   <%= link to: "/events/#{@event.guid}/scorecards/#{@scorecard_num}/preview?close_url=/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num}" do %>
-    <button type="button">View Full Scorecard</button><br />
-  <%= end %>
+    <button type="button">Full Scorecard</button><br />
+  <% end %>
   <%= link to: "/events/#{@event.guid}/leaderboard?close_url=/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num}" do %>
-    <button type="button">Live Leaderboard</button><br />
-  <%= end %>
+    <button type="button">
+      Leaderboard
+    </button><br />
+  <% end %>
   <form phx-submit="save" class="scorecard-form">
     <div class="text-center m-8 text-xl font-semibold">
       Hole <%= @hole_num %> <span class="font-thin">-</span> Par <%= @hole_data["par"] %>
@@ -34,10 +36,10 @@
     <button type="submit" class="primary-btn">Save Scores & Go To Next Hole</button>
     <%= link to: "/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num + 1}" do %>
     <button type="button">Skip To Next Hole</button>
-    <%= end %>
+    <% end %>
     <%= link to: "/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num - 1}" do %>
       <button type="button" >Skip To Previous Hole</button>
-    <%= end %>
+    <% end %>
   </form>
 </div>
 

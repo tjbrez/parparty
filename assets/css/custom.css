@@ -9,7 +9,7 @@ button {
     @apply bg-cool-gray-200;
     @apply rounded-lg;
     @apply outline-none;
-    @apply my-3;
+    @apply my-2;
     @apply font-medium;
     @apply text-gray-800;
     @apply tracking-normal;
@@ -143,6 +143,14 @@ a {
     @apply my-4;
 }
 
+.scorecard-container {
+    @apply border;
+    @apply border-cool-gray-300;
+    @apply rounded-lg;
+    @apply p-6;
+    @apply my-6;
+}
+
 .scorecard-box {
     @apply border;
     @apply p-1;
@@ -162,4 +170,5 @@ a {
 
 .scorecard-box.totals {
     @apply bg-white;
+    @apply rounded-lg;
 }

@@ -4,11 +4,11 @@
 <div class="flex flex-col justify-center">
     <%= link to: "/events/#{@guid}/scorecards" do %>
       <button type="button">View & Edit Scores</button>
-    <%= end %>
+    <% end %>
     <%= link to: "/events/#{@guid}/leaderboard" do %>
-      <button type="button">Live Leaderboard</button>
-    <%= end %>
+      <button type="button">Leaderboard</button>
+    <% end %>
     <%= link to: "/events/#{@guid}/settings" do %>
       <button type="button">Settings</button>
-    <%= end %>
+    <% end %>
 </div>
