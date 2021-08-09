@@ -47,12 +47,20 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
 
   defp build_best_ball_team({_scorecard_num, players}) do
     combined_scores = Enum.map(players, fn p -> p.score end)
-      |> Enum.min_by(fn scores -> scores["hole01"]["strokes"] end)
+      |> Enum.reduce(%{}, fn score, acc -> merge_best_ball_scores(acc, score) end)
 
     combined_names = Enum.reduce(players, " ", fn p, names -> "#{names}, #{p.name}" end)
       |> String.replace(" , ", "")
     
     %{name: combined_names, score: combined_scores || %{}}
+  end
+
+  defp merge_best_ball_scores(acc, nil) do
+    acc
+  end
+
+  defp merge_best_ball_scores(acc, score) do
+    Map.merge(acc, score, fn _k, v1, v2 -> Enum.min([v1, v2]) end)
   end
 
   defp get_score(nil, _course) do
