@@ -63,7 +63,6 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
     Map.merge(acc, score, fn _k, v1, v2 -> compare_best_ball_scores(v1,v2) end)
   end
 
-
   defp compare_best_ball_scores(score1, score2) do
     if String.to_integer(score1["strokes"]) < String.to_integer(score2["strokes"]), do: score1, else: score2
   end

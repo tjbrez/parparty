@@ -1,5 +1,5 @@
 # Parparty
-The Parparty app is for use out on a golf course to keep scores and see standings on the live leaderboard. It currently supports stroke play, best ball, and scrambles. 
+The Parparty app makes it easy to enter scores and view a live leaderboard while playing a round of golf. It currently supports stroke play, best ball, and scrambles.  
 
 ### Developer Setup:
 
