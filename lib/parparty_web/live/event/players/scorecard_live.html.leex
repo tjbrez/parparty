@@ -1,46 +1,42 @@
-<div class="flex justify-center my-4">
-  <div class="title"><%= @event.name %></div>
+<div class="flex flex-col justify-center my-4 header">
+  <div class="title">Enter Scores</div>
+  <div class="subtitle"><%= @event.name %></div>
+  <%= link to: "/events/#{@event.guid}/scorecards/#{@scorecard_num}/preview?close_url=/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num}" do %>
+    <button type="button" class="nav-btn">Scorecard</button>
+  <% end %>
+  <div class="absolute top-8 right-10 w-20">
+    <%= link to: "/events/#{@event.guid}/leaderboard?close_url=/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num}" do %>
+      <button type="button" class="leaderboard-icon"></button>
+    <% end %>
+  </div>
 </div>
 <div class="flex flex-col justify-center">
-  <%= link to: "/events/#{@event.guid}/scorecards" do %>
-    <button type="button">Scorecards List</button><br />
-  <% end %>
-  <%= link to: "/events/#{@event.guid}/scorecards/#{@scorecard_num}/preview?close_url=/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num}" do %>
-    <button type="button">Full Scorecard</button><br />
-  <% end %>
-  <%= link to: "/events/#{@event.guid}/leaderboard?close_url=/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num}" do %>
-    <button type="button">
-      Leaderboard
-    </button><br />
-  <% end %>
   <form phx-submit="save" class="scorecard-form">
     <div class="text-center m-8 text-xl font-semibold">
       Hole <%= @hole_num %> <span class="font-thin">-</span> Par <%= @hole_data["par"] %>
     </div>
-    <div class="grid grid-cols-4 gap-2 mb-8">
-      <div></div>
+    <div class="grid grid-cols-5 gap-4 mb-8">
+      <div class="col-span-2"></div>
       <div class="text-center">Old</div>
       <div class="ml-16 pl-3 col-span-2">New</div>
       <%= for player <- @players do %>
-        <div class="leading-8 text-center mt-7 font-semibold"><%= player.name %></div>
+        <div class="leading-8 text-center m-auto col-span-2">
+          <%= player.name %>
+        </div>
         <div class="flex justify-center mt-3">
           <input value="<%= player.score[@hole_key]["strokes"]  || "" %>" class="hole-input" readonly/>
         </div>
-        <div class="col-span-2">
+        <div class="col-span-2 whitespace-nowrap">
           <button type="button" onclick="decrementValue('<%= player.id %>')" class="hole-btn"> &#706; </button>
           <input id="<%= player.id %>" name="<%= player.id %>" value="<%= player.score[@hole_key]["strokes"]  || @hole_data["par"] %>" class="hole-input" readonly/>
           <button type="button" onclick="incrementValue('<%= player.id %>')" class="hole-btn"> &#707; </button>
         </div>
       <% end %>
     </div>
-    <button type="submit" class="primary-btn">Save Scores & Go To Next Hole</button>
-    <%= link to: "/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num + 1}" do %>
-    <button type="button">Skip To Next Hole</button>
-    <% end %>
-    <%= link to: "/events/#{@event.guid}/scorecards/#{@scorecard_num}?hole=#{@hole_num - 1}" do %>
-      <button type="button" >Skip To Previous Hole</button>
-    <% end %>
+
+    <button type="submit" class="primary-btn">Save Score<%= if length(@players) > 1, do: "s", else: "" %> & Go To Next Hole</button>
   </form>
+  <div class="font-light text-center my-4">hint: view "Scorecard" to skip to a specific hole</div>
 </div>
 
 <script>

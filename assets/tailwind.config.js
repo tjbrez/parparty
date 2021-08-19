@@ -18,6 +18,12 @@ module.exports = {
         lg: ['20px', '28px'],
         xl: ['24px', '32px'],
       },
+      extend: {
+        backgroundImage: theme => ({
+         'leaderboard': "url('/images/podium.png')",
+         'close': "url('/images/error.png')",
+        })
+      },
       colors: {
         transparent: 'transparent',
         white: '#ffffff',

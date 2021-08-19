@@ -1,15 +1,16 @@
 body {
     @apply text-gray-800;
     @apply font-medium;
+    margin-top: -10px;
 }
 
 button {
-    @apply border;
-    @apply border-white;
-    @apply bg-cool-gray-200;
+    @apply border-none;
+    @apply bg-gradient-to-r from-cool-gray-300 to-gray-200;
+    @apply shadow-lg;
     @apply rounded-lg;
     @apply outline-none;
-    @apply my-2;
+    @apply my-4;
     @apply font-medium;
     @apply text-gray-800;
     @apply tracking-normal;
@@ -18,22 +19,18 @@ button {
 }
 
 button:hover {
-    @apply border-cool-gray-300;
-    @apply bg-cool-gray-300;
     @apply text-gray-800;
+    @apply outline-none;
 }
 
 button:active {
-    @apply border-cool-gray-300;
-    @apply bg-cool-gray-300;
     @apply text-gray-800;
+    @apply outline-none;
 }
 
 button:focus {
     @apply outline-none;
     @apply shadow-none;
-    @apply border-cool-gray-300;
-    @apply bg-white;
     @apply text-gray-800;
 }
 
@@ -76,8 +73,30 @@ a {
     @apply cursor-pointer;
 }
 
+.nav-btn {
+    @apply bg-gradient-to-r from-cool-gray-100 to-white;
+}
+
+.leaderboard-icon {
+    @apply bg-leaderboard;
+    @apply bg-no-repeat;
+    @apply bg-center;
+    @apply bg-contain;
+    @apply shadow-none;
+}
+
+.close-icon {
+    @apply bg-close;
+    @apply bg-no-repeat;
+    @apply bg-center;
+    @apply bg-contain;
+    @apply shadow-none;
+}
+
 .primary-btn {
-    @apply bg-green-200;
+    @apply bg-gradient-to-r from-cool-gray-500 to-blue-400;
+    @apply text-white;
+    @apply font-semibold;
 }
 
 .danger-btn {
@@ -111,9 +130,22 @@ a {
     @apply text-red-700;
 }
 
+.header {
+    @apply bg-gradient-to-br from-green-600 via-cool-gray-500 to-blue-400;
+    @apply p-8;
+    @apply text-white;
+}
+
 .title {
     @apply text-xl;
+    @apply text-center;
+    @apply font-semibold;
+}
+
+.subtitle {
+    @apply mt-2;
     @apply mb-4;
+    @apply font-light;
     @apply text-center;
 }
 
@@ -135,11 +167,7 @@ a {
 }
 
 .scorecard-form {
-    @apply border;
-    @apply border-cool-gray-300;
-    @apply rounded-lg;
-    @apply px-6;
-    @apply py-4;
+    @apply px-8;
     @apply my-4;
 }
 
@@ -160,7 +188,7 @@ a {
 }
 
 .scorecard-box.par {
-    @apply bg-indigo-100;
+    @apply bg-blue-100;
 }
 
 .scorecard-box.score {

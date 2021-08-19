@@ -15,7 +15,8 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
         socket, 
         event: event, 
         leaderboard: get_leaderboard(event),
-        close_url: close_url(params["close_url"], event.guid))}
+        close_url: close_url(params["close_url"], event.guid),
+        nav_label: nav_label(params["close_url"]))}
   end
 
   def handle_info(:refresh, socket) do
@@ -85,6 +86,18 @@ defmodule ParpartyWeb.Event.Players.LeaderboardLive do
 
   defp close_url(nil, guid) do
     "/events/#{guid}"
+  end
+
+  defp close_url(url, _guid) do
+    url
+  end
+
+  defp nav_label(nil) do
+    "Teams"
+  end
+
+  defp nav_label(url) do
+    "Enter Scores"
   end
 
   defp close_url(url, _guid) do

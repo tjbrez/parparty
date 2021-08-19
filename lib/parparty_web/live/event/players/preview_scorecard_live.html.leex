@@ -1,20 +1,34 @@
-<div class="flex justify-center flex-col mt-4">
+<div class="flex flex-col justify-center my-4 header">
   <div class="title"><%= if @event.type == "Stroke", do: "Scorecard", else: "Team" %> <%= @scorecard_num %></div>
+  <div class="subtitle"><%= @event.name %></div>
+  <div class="grid grid-cols-2 gap-4">
+    <%= link to: "/events/#{@event.guid}/scorecards/#{@scorecard_num}" do %>
+      <button type="button" class="nav-btn">Enter Scores</button>
+    <% end %>
+    <%= link to: "/events/#{@event.guid}/scorecards" do %>
+      <button type="button" class="nav-btn"><%= if @event.type == "Stroke", do: "Scorecards", else: "Teams" %></button>
+    <% end %>
+  </div>
+  <div class="absolute top-8 right-10 w-20">
+    <%= link to: "/events/#{@event.guid}/leaderboard?close_url=/events/#{@event.guid}/scorecards/#{@scorecard_num}/preview" do %>
+      <button type="button" class="leaderboard-icon"></button>
+    <% end %>
+  </div>
 </div>
-<div class="flex flex-col justify-center mb-8">
+<div class="flex flex-col justify-center mb-8 mx-8">
   <%= for player <- @players do %>
     <div class="scorecard-container">
       <div class="col-span-2 font-semibold text-lg"><%= player.name %></div>
       <div class="grid grid-cols-11 gap-0 mt-6 mb-6">
-        <div class="scorecard-box rounded-tl-lg">#1</div>
-        <div class="scorecard-box">#2</div>
-        <div class="scorecard-box">#3</div>
-        <div class="scorecard-box">#4</div>
-        <div class="scorecard-box">#5</div>
-        <div class="scorecard-box">#6</div>
-        <div class="scorecard-box">#7</div>
-        <div class="scorecard-box">#8</div>
-        <div class="scorecard-box">#9</div>
+        <div class="scorecard-box rounded-tl-lg"><%= link to: "#{@enter_scores_base_url}?hole=1" do %>#1<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=2" do %>#2<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=3" do %>#3<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=4" do %>#4<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=5" do %>#5<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=6" do %>#6<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=7" do %>#7<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=8" do %>#8<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=9" do %>#9<% end %></div>
         <div class="scorecard-box col-span-2 rounded-tr-lg">OUT</div>
         <div class="scorecard-box par"><%= @event.course.holes["hole01"]["par"] %></div>
         <div class="scorecard-box par"><%= @event.course.holes["hole02"]["par"] %></div>
@@ -43,15 +57,15 @@
         </div>
       </div>
       <div class="grid grid-cols-11 gap-0 mt-4 mb-6">
-        <div class="scorecard-box rounded-tl-lg">#10</div>
-        <div class="scorecard-box">#11</div>
-        <div class="scorecard-box">#12</div>
-        <div class="scorecard-box">#13</div>
-        <div class="scorecard-box">#14</div>
-        <div class="scorecard-box">#15</div>
-        <div class="scorecard-box">#16</div>
-        <div class="scorecard-box">#17</div>
-        <div class="scorecard-box">#18</div>
+        <div class="scorecard-box rounded-tl-lg"><%= link to: "#{@enter_scores_base_url}?hole=10" do %>#10<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=11" do %>#11<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=12" do %>#12<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=13" do %>#13<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=14" do %>#14<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=15" do %>#15<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=16" do %>#16<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=17" do %>#17<% end %></div>
+        <div class="scorecard-box"><%= link to: "#{@enter_scores_base_url}?hole=18" do %>#18<% end %></div>
         <div class="scorecard-box col-span-2 rounded-tr-lg">IN</div>
         <div class="scorecard-box par"><%= @event.course.holes["hole10"]["par"] %></div>
         <div class="scorecard-box par"><%= @event.course.holes["hole11"]["par"] %></div>
@@ -99,9 +113,5 @@
         </div>
       </div>
     </div>
-  <% end %>
-
-  <%= link to: @close_url do %>
-    <button type="button" class="mt-4 mb-4">Close</button>
   <% end %>
 </div>

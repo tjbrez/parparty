@@ -14,7 +14,7 @@ defmodule ParpartyWeb.Event.Players.PreviewScorecardLive do
         players: get_scorecard_players(event.players, params["scorecard_num"], event.course), 
         scorecard_num: params["scorecard_num"], 
         course_details: course_details(event.course), 
-        close_url: close_url(params["close_url"], event.guid, params["scorecard_num"]))}
+        enter_scores_base_url: "/events/#{event.guid}/scorecards/#{params["scorecard_num"]}")}
   end
 
   defp get_scorecard_players(players, num, course) do
@@ -61,14 +61,6 @@ defmodule ParpartyWeb.Event.Players.PreviewScorecardLive do
 
   defp get_par_for_hole(hole, course) do
     String.to_integer(course.holes[hole]["par"])
-  end
-
-  defp close_url(nil, guid, scorecard_num) do
-    "/events/#{guid}/scorecards/#{scorecard_num}"
-  end
-
-  defp close_url(url, _guid, _scorecard_num) do
-    url
   end
 
   defp course_details(course) do

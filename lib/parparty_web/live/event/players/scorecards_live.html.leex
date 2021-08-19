@@ -1,12 +1,15 @@
-<div class="flex justify-center my-4">
-  <div class="title"><%= @event.name %></div>
-</div>
-<div class="flex flex-col justify-center">
-    <%= link to: "/events/#{@event.guid}" do %>
-      <button type="button">Main Menu</button>
+<div class="flex flex-col justify-center my-4 header">
+  <div class="title"><%= if @event.type == "Stroke", do: "Scorecards", else: "Teams" %></div>
+  <div class="subtitle"><%= @event.name %></div>
+  <div class="absolute top-8 right-10 w-20">
+    <%= link to: "/events/#{@event.guid}/leaderboard" do %>
+      <button type="button" class="leaderboard-icon"></button>
     <% end %>
+  </div>
+</div>
+<div class="flex flex-col justify-center px-8 pb-8">
     <%= for {scorecard_id, players} <- @scorecards do %>
-      <%= link to: "/events/#{@event.guid}/scorecards/#{scorecard_id}" do %>
+      <%= link to: "/events/#{@event.guid}/scorecards/#{scorecard_id}/preview" do %>
         <button type="button" class="h-60">
           <span class="font-bold"><%= if @event.type == "Stroke", do: "Scorecard", else: "Team" %> <%= scorecard_id %></span><br />
           <%= for player <- players do %>
