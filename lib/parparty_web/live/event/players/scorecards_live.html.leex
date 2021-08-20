@@ -10,7 +10,7 @@
 <div class="flex flex-col justify-center px-8 pb-8">
     <%= for {scorecard_id, players} <- @scorecards do %>
       <%= link to: "/events/#{@event.guid}/scorecards/#{scorecard_id}/preview" do %>
-        <button type="button" class="h-60">
+        <button type="button" class="scorecard-btn">
           <span class="font-bold"><%= if @event.type == "Stroke", do: "Scorecard", else: "Team" %> <%= scorecard_id %></span><br />
           <%= for player <- players do %>
             <span class="leading-8"><%= player.name %></span><br />

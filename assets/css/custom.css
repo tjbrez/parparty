@@ -73,6 +73,11 @@ a {
     @apply cursor-pointer;
 }
 
+.scorecard-btn {
+    @apply h-auto;
+    @apply p-6;
+}
+
 .nav-btn {
     @apply bg-gradient-to-r from-cool-gray-100 to-white;
 }
