@@ -39,6 +39,11 @@ defmodule Parparty.Event do
     end
 
     def upsert_player(player, attrs \\ %{}) do
+      update_starting_hole_for_players(
+        attrs["start"], 
+        player.event.id, 
+        player.scorecard || attrs["scorecard"])
+
       player
       |> PlayerSchema.changeset(attrs)
       |> Repo.insert_or_update()
@@ -47,4 +52,19 @@ defmodule Parparty.Event do
     def delete_player(player) do
       player |> Repo.delete()
     end
+
+    def update_starting_hole_for_players(nil, _event_id, _scorecard) do
+      #no-op
+    end
+
+    def update_starting_hole_for_players("", event_id, scorecard) do
+      from(p in PlayerSchema, where: p.event_id == ^event_id and p.scorecard == ^scorecard)
+      |> Repo.update_all(set: [start: nil])
+    end
+
+    def update_starting_hole_for_players(start, event_id, scorecard) do
+      from(p in PlayerSchema, where: p.event_id == ^event_id and p.scorecard == ^scorecard)
+      |> Repo.update_all(set: [start: String.to_integer(start)])
+    end
+
   end

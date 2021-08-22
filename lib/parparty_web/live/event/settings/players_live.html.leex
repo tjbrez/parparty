@@ -1,4 +1,4 @@
-<div class="flex justify-center my-4">
+<div class="flex justify-center mt-12  mb-4">
   <div class="title"><%= @event.name %></div>
 </div>
 <div class="flex justify-center">
@@ -7,19 +7,21 @@
       <button type="button" class="mb-10">Settings Menu</button>
     <% end %>
     <%= if length(@players) > 0 do %>
-      <div class="grid grid-cols-4 gap-2">
+      <div class="grid grid-cols-6 gap-2">
         <label class="col-span-2">Name</label>
-        <label>Scorecard</label>
-        <label>Handicap</label>
+        <label class="col-span-2">Scorecard</label>
+        <label>Hdcp</label>
+        <label>Start</label>
         <%= for player <- @players do %>
-          <hr class="col-span-4"/>
+          <hr class="col-span-6"/>
           <div class="col-span-2">
             <%= link to: "/events/#{@event.guid}/settings/players?type=edit&id=#{player.id}" do %>
               <%= player.name %>
             <% end %>
           </div>
-          <div><%= player.scorecard %></div>
+          <div class="col-span-2"><%= player.scorecard %></div>
           <div><%= player.handicap %></div>
+          <div><%= player.start %></div>
         <% end %>
       </div>
     <% else %>
@@ -27,16 +29,20 @@
     <% end %>
     <form class="px-0" phx-submit="upsert_player">
       <div class="border border-cool-gray-300 rounded-lg p-8 my-10">
-        <label for="name">Player Name</label>
+        <label for="name" class="mt-2">Player Name</label>
         <input type="text" name="name" value="<%= if @player, do: @player.name, else: "" %>" placeholder="Sherlock H" autocomplete="off" autofocus/>
         <label for="name"><%= if @event.type == "Stroke", do: "Scorecard", else: "Team" %></label>
         <button type="button" onclick="decrementValue('scorecard')" class="hole-btn"> &#706; </button>
         <input id="scorecard" name="scorecard" value="<%= if @player, do: @player.scorecard, else: "1" %>" class="hole-input" readonly/>
         <button type="button" onclick="incrementValue('scorecard')" class="hole-btn"> &#707; </button>
-        <label for="name">Handicap (optional)</label>
+        <label for="name" class="mt-6">Handicap (optional)</label>
         <button type="button" onclick="decrementValue('handicap', true)" class="hole-btn"> &#706; </button>
         <input id="handicap" name="handicap" value="<%= if @player, do: @player.handicap, else: "" %>" class="hole-input" readonly/>
         <button type="button" onclick="incrementValue('handicap')" class="hole-btn"> &#707; </button>
+        <label for="name" class="mt-6">Starting hole (optional and will update for whole group/scorecard)</label>
+        <button type="button" onclick="decrementValue('start', true)" class="hole-btn"> &#706; </button>
+        <input id="start" name="start" value="<%= if @player, do: @player.start, else: "" %>" class="hole-input" readonly/>
+        <button type="button" onclick="incrementValue('start')" class="hole-btn"> &#707; </button>
         <%= if @player do %>
           <button type="submit" class="primary-btn">Update Player</button>
           <button type="button" data-confirm="Are you sure you want to delete the player and their scores?" class="danger-btn" phx-click="delete_player">Delete Player</button>

@@ -9,6 +9,7 @@ defmodule Parparty.Schemas.Player do
       field :name, :string
       field :scorecard, :integer
       field :handicap, :integer
+      field :start, :integer
       field :score, :map
 
       belongs_to :event, Event
@@ -19,7 +20,7 @@ defmodule Parparty.Schemas.Player do
     @doc false
     def changeset(%Player{} = player, attrs) do
       player
-      |> cast(attrs, [:name, :scorecard, :handicap, :score])
+      |> cast(attrs, [:name, :scorecard, :handicap, :start, :score])
       |> validate_required([:name, :scorecard, :event])
     end
   end

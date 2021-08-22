@@ -52,7 +52,11 @@ defmodule ParpartyWeb.Event.Players.ScorecardLive do
   end
 
   defp get_hole_num(nil, %{score: score} = player) do
-    (score |> normalize_score |> Map.keys |> length) + 1
+    hole_keys = score |> normalize_score |> Map.keys 
+    case hole_keys |> length do
+      0 -> player.start
+      _hole -> (hole_keys |> List.last |> String.slice(4, 6) |> String.to_integer()) + 1
+    end
   end
 
   defp get_hole_num(hole, _players) do
